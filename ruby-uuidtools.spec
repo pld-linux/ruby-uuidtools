@@ -7,7 +7,6 @@ Group:		Development/Languages
 Source0:	http://gems.rubyforge.org/gems/uuidtools-%{version}.gem
 # Source0-md5:	d362d1286ce3b805f0e8286474120bd3
 URL:		http://sporkmonger.com/projects/uuidtools/
-BuildRequires:	rake
 BuildRequires:	rpmbuild(macros) >= 1.277
 BuildRequires:	setup.rb >= 3.3.1
 #BuildArch:	noarch
