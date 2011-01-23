@@ -9,7 +9,7 @@ Source0:	http://gems.rubyforge.org/gems/uuidtools-%{version}.gem
 URL:		http://sporkmonger.com/projects/uuidtools/
 BuildRequires:	rake
 BuildRequires:	rpmbuild(macros) >= 1.277
-BuildRequires:	setup.rb = 3.3.1
+BuildRequires:	setup.rb >= 3.3.1
 #BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
