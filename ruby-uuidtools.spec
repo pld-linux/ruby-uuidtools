@@ -2,7 +2,7 @@
 Summary:	UUID generation library for Ruby
 Name:		ruby-%{pkgname}
 Version:	1.0.3
-Release:	1
+Release:	2
 License:	Ruby's
 Group:		Development/Languages
 Source0:	http://gems.rubyforge.org/gems/uuidtools-%{version}.gem
