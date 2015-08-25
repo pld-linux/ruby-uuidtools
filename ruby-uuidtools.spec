@@ -2,15 +2,14 @@
 Summary:	UUID generation library for Ruby
 Name:		ruby-%{pkgname}
 Version:	1.0.3
-Release:	2
-License:	Ruby's
+Release:	3
+License:	GPL v2+ or Ruby
 Group:		Development/Languages
 Source0:	http://gems.rubyforge.org/gems/uuidtools-%{version}.gem
 # Source0-md5:	d362d1286ce3b805f0e8286474120bd3
 URL:		http://sporkmonger.com/projects/uuidtools/
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
-BuildRequires:	setup.rb >= 3.3.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -33,24 +32,18 @@ Dokumentacja w formacie HTML dla %{pkgname}.
 
 %prep
 %setup -q
-cp %{_datadir}/setup.rb .
 
 %build
-%{__ruby} setup.rb config \
-	--rbdir=%{ruby_rubylibdir} \
-	--sodir=%{ruby_archdir}
-
-%{__ruby} setup.rb setup
+# write .gemspec
+%__gem_helper spec
 
 rdoc --op rdoc lib
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{ruby_archdir},%{ruby_ridir}}
-%{__ruby} setup.rb install \
-	--prefix=$RPM_BUILD_ROOT
-
-install -d $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
+install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_ridir},%{ruby_rdocdir}/%{name}-%{version},%{ruby_specdir}}
+cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
+cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
 cp -a rdoc/* $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
 
 %clean
@@ -58,8 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{ruby_libdir}/uuidtools.rb
-%{ruby_libdir}/uuidtools
+%{ruby_vendorlibdir}/uuidtools.rb
+%{ruby_vendorlibdir}/uuidtools
+%{ruby_specdir}/%{pkgname}-%{version}.gemspec
 
 %files rdoc
 %defattr(644,root,root,755)
