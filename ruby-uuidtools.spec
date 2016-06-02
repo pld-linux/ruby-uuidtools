@@ -61,6 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc README.md CHANGELOG
 %{ruby_vendorlibdir}/uuidtools.rb
 %{ruby_vendorlibdir}/uuidtools
 %dir %{ruby_vendorlibdir}/compat
