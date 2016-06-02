@@ -1,15 +1,25 @@
+#
+# Conditional build:
+%bcond_with	tests		# build without tests
+
 %define pkgname uuidtools
 Summary:	UUID generation library for Ruby
 Name:		ruby-%{pkgname}
-Version:	1.0.3
-Release:	4
-License:	GPL v2+ or Ruby
+Version:	2.1.5
+Release:	1
+License:	Apache v2.0
 Group:		Development/Languages
 Source0:	http://gems.rubyforge.org/gems/uuidtools-%{version}.gem
-# Source0-md5:	d362d1286ce3b805f0e8286474120bd3
-URL:		http://sporkmonger.com/projects/uuidtools/
+# Source0-md5:	13de7689edf1f1628d4a14daa764bf5a
+URL:		https://github.com/sporkmonger/uuidtools
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
+%if %{with tests}
+BuildRequires:	ruby-launchy >= 2.0.0
+BuildRequires:	ruby-rake >= 0.7.3
+BuildRequires:	ruby-rspec >= 2.9.0
+BuildRequires:	ruby-yard >= 0.8.2
+%endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -53,6 +63,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{ruby_vendorlibdir}/uuidtools.rb
 %{ruby_vendorlibdir}/uuidtools
+%dir %{ruby_vendorlibdir}/compat
+%{ruby_vendorlibdir}/compat/securerandom.rb
 %{ruby_specdir}/%{pkgname}-%{version}.gemspec
 
 %files rdoc
